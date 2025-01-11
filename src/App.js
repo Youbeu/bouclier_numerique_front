@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import OnboardingPage from "./pages/OnboardingPage";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import NotFound from "./pages/404";
+import Dashboard from "./pages/Dashboard";
+import PasswordManagment from "./pages/PasswordManagment";
+import UserProfile from "./pages/UserProfile";
+import About from "./pages/about";
+import Sidebar from "./components/sidebar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+      <div className="App">
+        <ContentWithSidebar />
+      </div>
+    </Router>
+  );
+}
+
+function ContentWithSidebar() {
+  const location = useLocation();
+
+  // Pages où la barre latérale doit être visible
+  const pagesWithSidebar = ["/dashboard", "/password-managment", "/user-profile", "/about"];
+
+  const isSidebarVisible = pagesWithSidebar.includes(location.pathname);
+
+  return (
+    <div className="content">
+      {isSidebarVisible && <Sidebar />}
+      <Routes>
+        <Route path="/" element={<OnboardingPage />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/password-managment" element={<PasswordManagment />} />
+        <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
