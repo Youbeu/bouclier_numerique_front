@@ -41,7 +41,7 @@ const OnboardingPage = () => {
             <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                 {index < pages.length && (
                     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-                        {index === 2 && (
+                        {(index === 1 || index===2) && (
                             <button
                                 onClick={() => setIndex(pages.length)}
                                 style={{ marginRight: "10px" }}
