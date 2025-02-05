@@ -1,28 +1,40 @@
-const PasswordList = () => {
+import { useState, useEffect} from 'react';
+import axiosInstance from '../api/axiosInstance';
+import { Link } from 'react-router-dom';
 
-    const Password = [
-        {
-            'title':'Facebook',
-            'password':'********'
-        },
-        {
-            'title':'Twitter',
-            'password':'********'
-        },
-        {
-            'title':'Instagram',
-            'password':'********'
-        },
-    ]
+const PasswordList = () => {
+    const [Passwords, setPasswords] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchPasswords = async () => {
+            try {
+                const response = await axiosInstance.get("passwords/");
+                setPasswords(response.data);
+            } catch (err) {
+                setError("Erreur lors du chargement des mots de passe.");
+                console.error(err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchPasswords();
+    }, []);
+
+    if (isLoading) return <p>Chargement des mots de passe...</p>;
+    if (error) return <p style={{ color: "red" }}>{error}</p>;
     return ( 
         <div className="password-list" style={{gap:'20px'}}>
             <h2>Mots de Passe</h2>
             <p>Voici la liste de vos mots de passe</p>
             <div className='list'>
-                {Password.map((item, index) => (
+                {Passwords.map((item, index) => (
                     <div className="password" key={index}>
-                        <h2>{item.title}</h2>
-                        <p>{item.password}</p>
+                        <Link to={`/passwords/${item.id}`} key={item.id} className="password">
+                            <h2>{item.title}</h2>
+                            <p>{item.password}</p>
+                        </Link>
                     </div>
                 )
                 )}

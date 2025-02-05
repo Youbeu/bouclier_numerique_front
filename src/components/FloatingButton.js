@@ -1,5 +1,4 @@
 import {React, useState} from "react";
-import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
 function FloatingButton() {
@@ -11,29 +10,18 @@ function FloatingButton() {
         password: ''
     });
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    // Fonction pour générer un mot de passe sécurisé
-    const generatePassword = () => {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
-        const passwordLength = 12;
-        let password = '';
-        for (let i = 0; i < passwordLength; i++) {
-            const randomIndex = Math.floor(Math.random() * chars.length);
-            password += chars[randomIndex];
-        }
-        setFormData({ ...formData, password });
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const response = await axiosInstance.post("passwords/", formData);
-            console.log("Mot de passe ajouté :", response.data);
             setError('');
             setFormData({
                 title: '',
@@ -43,12 +31,13 @@ function FloatingButton() {
             });
         } catch (error) {
             if (error.response && error.response.data) {
-                console.error("Erreur lors de l'ajout du mot de passe", error.response.data);
                 setError("Échec de l'ajout du mot de passe : " + JSON.stringify(error.response.data));
             } else {
-                console.error("Erreur inattendue", error);
                 setError("Une erreur inattendue s'est produite. Veuillez réessayer.");
             }
+        }
+        finally {
+            setIsLoading(false);
         }
     };
 
@@ -75,7 +64,7 @@ function FloatingButton() {
                         <button  onClick={handleClose}>X</button>
                     </div>
                     <h2>Ajouter un Nouveau Mot de Passe</h2>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <label>Titre</label>
                         <input 
                             type="text" 
@@ -102,18 +91,18 @@ function FloatingButton() {
                             value={formData.email} 
                         />
                         <label>Mot de Passe</label>
-                        <div style={{display: "flex", justifyContent: "space-between", marginBottom:"30px", alignItems: "center"}}>
-                            <input 
-                                type="password" 
-                                name="password" 
-                                placeholder="Mot de Passe" 
-                                required
-                                onChange={handleChange} 
-                                value={formData.password} 
-                            />
-                            <button style={{color:'white'}} type="button" onClick={generatePassword}>Générer</button>
-                        </div>
-                        <button onClick={handleSubmit}>Enregistrer</button>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            placeholder="Mot de Passe" 
+                            required
+                            onChange={handleChange} 
+                            value={formData.password} 
+                        />
+                        <p>{error}</p>
+                        <button>
+                            {isLoading ? "Ajout en cours..." : "Ajouter le Mot de Passe"}
+                        </button>
                     </form>
                 </div>
             )}
