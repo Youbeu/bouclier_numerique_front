@@ -29,14 +29,26 @@ const PasswordDetails = () => {
     if (isLoading) return <p>Chargement en Cours...</p>;
     if (error) return <p style={{ color: "red" }}>{error}</p>;
     return ( 
-        <div className="password-detail">
-            <h2>Détails du Mot de Passe</h2>
-            <p>Ici Vous pouvez mettre à jour les informations de votre mot de passe ou le supprimer</p>
+        <div>
+            <div className="password-details">
+                <h2>Détails du Mot de Passe</h2>
+                <p>Ici Vous pouvez mettre à jour les informations de votre mot de passe ou le supprimer</p>
+            </div>
             <div className='details'>
-                <h2>{password.title}</h2>
-                <p>password.title</p>
-                <h2>Mot de Passe</h2>
-                <p>password.password</p>
+                <p>Titre :</p>
+                <h3>{password.title}</h3>
+            </div>
+            <div className='details'>
+                <p>Identifiant :</p>
+                <h3>{password.identifier}</h3>
+            </div>
+            <div className='details'>
+                <p>Adresse Mail :</p>
+                <h3>{password.email}</h3>
+            </div>
+            <div className='details'>
+                <p>Mot de passe :</p>
+                <h3>{password.decrypted_password}</h3>
             </div>
         </div>
      );

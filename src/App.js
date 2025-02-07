@@ -8,7 +8,7 @@ import PasswordManagment from "./pages/PasswordManagment";
 import UserProfile from "./pages/UserProfile";
 import About from "./pages/about";
 import Sidebar from "./components/sidebar";
-import PasswordDetails from "./pages/passwordDetails";
+import PasswordDetails from "./pages/DetailsPassword";
 
 function App() {
   return (
@@ -24,9 +24,10 @@ function ContentWithSidebar() {
   const location = useLocation();
 
   // Pages où la barre latérale doit être visible
-  const pagesWithSidebar = ["/dashboard", "/password-managment", "/user-profile", "/about", "/password/:id"];
+  const pagesWithSidebar = ["/dashboard", "/password-managment", "/user-profile", "/about"];
 
-  const isSidebarVisible = pagesWithSidebar.includes(location.pathname);
+  // Vérifie si l'URL actuelle correspond à une route avec sidebar
+  const isSidebarVisible = pagesWithSidebar.includes(location.pathname) || location.pathname.startsWith("/password/");
 
   return (
     <div className="content">

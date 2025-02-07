@@ -38,6 +38,7 @@ function FloatingButton() {
         }
         finally {
             setIsLoading(false);
+            window.location.reload();
         }
     };
 
@@ -99,7 +100,7 @@ function FloatingButton() {
                             onChange={handleChange} 
                             value={formData.password} 
                         />
-                        <p>{error}</p>
+                        <p style={{color:'red'}}>{error}</p>
                         <button>
                             {isLoading ? "Ajout en cours..." : "Ajouter le Mot de Passe"}
                         </button>
