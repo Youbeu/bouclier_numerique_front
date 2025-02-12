@@ -3,7 +3,7 @@ const NotFound = () => {
         <div className="not-found">
             <h2>404</h2>
             <p>La Page que vous Demandez N'existe Pas !</p>
-            <a href="/dashbord">Retour à la Page d'Accueil...</a>
+            <a href="/">Retour à la Page d'Accueil...</a>
         </div>
      );
 }

@@ -156,72 +156,11 @@ main{
   font-weight: bold;
   margin-bottom: 15px;
 }
-.floating-button{
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  bottom: 20px;
-  right: 20px;
-  background: #f1356d;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 4px 8px whitesmoke;
-}
-.add-password{
-  max-width: 500px;
-  border-radius: 8px;
-  padding: 25px;
-  box-shadow: 0 4px 8px #f1356d;
-  text-align: center;
-  margin-top: 20px;
-  background-color: #fff;
-}
-.add-password label, input {
-  text-align: left;
-  display: block;
-}
-.add-password h2 {
-  font-size: 20px;
-  color: #f1356d;
-  margin-bottom: 30px;
-}
-.add-password input {
-  width: 100%;
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-.add-password p {
-  margin-bottom: 30px;
-}
-.add-password button {
-  width: 100%;
-  background-color: #f1356d;
-  color: #fff;
-  border: 0;
-  border-radius: 8px;
-  margin: 15px;
-  height: 30px;
-  cursor: pointer;
-}
 .content-password{
   border: #ccc 1px solid;
-  display: flex;
-  justify-content: space-evenly;
+  width: 80%;
 }
-.close{
-  color: #fff;
-  font-weight: bold;
-  border: 0;
-  border-radius: 8px;
-  font-size: 15px;
-  width: 10%;
-  margin-left: auto;
-}
+
 .user-profile-info{
   padding: 25px;
   margin-top: 25px;
@@ -257,3 +196,91 @@ main{
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 400px;
+}
+
+.modal-content h3 {
+  margin-bottom: 10px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content label {
+  margin-top: 10px;
+}
+
+.modal-content input {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.modal-content button {
+  margin-top: 8px;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button[type="submit"] {
+  background: #4CAF50;
+  color: white;
+}
+
+.modal-content button[type="button"] {
+  background: red;
+  color: white;
+}
+.delete-button {
+  background: #4CAF50;
+  color: white;
+}
+
+.cancel-button {
+  background: red;
+  color: white;
+  margin-left: 10px;
+}
+/* Flottant */
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Animation d’apparition */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
