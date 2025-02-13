@@ -4,7 +4,7 @@ import axiosInstance from "../api/axiosInstance";
 function FloatingButton() {
     const [formData, setFormData] = useState({
         title: '',
-        username: '',
+        identifier: '',
         email: '',
         password: ''
     });
@@ -27,7 +27,7 @@ function FloatingButton() {
             setError('');
             setFormData({
                 title: '',
-                username: '',
+                identifier: '',
                 email: '',
                 password: ''
             });
@@ -75,7 +75,7 @@ function FloatingButton() {
                             <label>Identifiant</label>
                             <input
                                 type="text"
-                                name="username"
+                                name="identifier"
                                 placeholder="Identifiant Associé"
                                 onChange={handleChange}
                                 value={formData.username}

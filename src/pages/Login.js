@@ -6,7 +6,6 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -24,7 +23,6 @@ const Login = () => {
             console.log("Connexion réussie :", response.data);
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
-            setIsLoggedIn(true);
             navigate('/dashboard');
         } catch (error) {
             const errorMessage = error.response?.data?.detail || "Identifiants incorrects.";
