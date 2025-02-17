@@ -4,8 +4,23 @@ import { FaUser, FaBars } from 'react-icons/fa';
 import { GiPadlock } from 'react-icons/gi';
 import { GrConfigure } from 'react-icons/gr';
 import { NavLink } from 'react-router-dom';
+import axiosInstance from "../api/axiosInstance";
 
+/**
+ * Composant Sidebar qui affiche une barre latérale avec des éléments de menu.
+ */
 const Sidebar = ({children}) => {
+    const handleLogout = async () => {
+        
+        try {
+            await axiosInstance.post("utilisateur/deconnexion/"); // Appel à l'API de déconnexion
+            localStorage.removeItem("access_token"); // Suppression du token
+            localStorage.removeItem("refresh_token"); // Suppression du token refresh si utilisé
+            window.location.href = "/login"; // Redirection vers la page de connexion
+        } catch (error) {
+            alert("Erreur lors de la déconnexion", error);
+        }
+    };
     const menuItems = [
         {
             'path':'/dashboard',
@@ -28,7 +43,7 @@ const Sidebar = ({children}) => {
             'icon':<GrConfigure/>
         },
         {
-            'path':'/',
+            'action': handleLogout,
             'name':'Se Déconnecter',
             'icon':<Logout/>
         },
@@ -46,11 +61,19 @@ const Sidebar = ({children}) => {
                     {isOpen && <h2 style={{marginLeft: isOpen? '40px':'0px'}}>Le Bouclier Numérique</h2> }
                 </div>
                 {menuItems.map((item, index) => (
-                    <NavLink to={item.path} key={index} className="link" activeClassName="active">
-                        <div className="icon" >{item.icon}</div>
-                        {isOpen && <div className="link-text"> {item.name}</div>}
-                    </NavLink>
+                    item.action ? (
+                        <div key={index} className="link" onClick={() => item.action()} style={{cursor: "pointer"}}>
+                            <div className="icon">{item.icon}</div>
+                            {isOpen && <div className="link-text">{item.name}</div>}
+                        </div>
+                    ) : (
+                        <NavLink to={item.path} key={index} className="link" activeClassName="active">
+                            <div className="icon">{item.icon}</div>
+                            {isOpen && <div className="link-text">{item.name}</div>}
+                        </NavLink>
+                    )
                 ))}
+
             </div>
         </div>
         <><main>{children}</main></></>

@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { useParams } from 'react-router-dom';
 
+/**
+ * Cette page permet de consulter, mettre à jour et supprimer les détails d'un mot de passe spécifique.
+ */
 const PasswordDetails = () => {
     const { id } = useParams();
     

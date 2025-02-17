@@ -269,7 +269,7 @@ main{
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #007bff;
+  background-color: #f1356d;
   color: white;
   border: none;
   border-radius: 50%;
@@ -284,11 +284,11 @@ main{
   to { opacity: 1; transform: scale(1); }
 }
 .about-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 950px;
   text-align: center;
   font-family: Arial, sans-serif;
+  height: 600px;
+  overflow-y: auto;
 }
 
 .about-container h1 {
@@ -307,7 +307,7 @@ main{
 }
 
 .about-section h2 {
-  color: #007bff;
+  color: #f1356d;
   font-size: 1.5em;
   margin-bottom: 10px;
 }

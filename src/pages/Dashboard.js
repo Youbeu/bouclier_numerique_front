@@ -17,14 +17,15 @@ const Dashboard = () => {
             }
         })
         .then((response) => {
-            setTotalPassword(response.data.total_passwords);
-            setTotalWeakPassword(response.data.weak_passwords);
-            setTotalStrongPassword(response.data.strong_passwords);
+            setTotalPassword(response.data["Total Mot de Passe"]);
+            setTotalWeakPassword(response.data["Total Mot de Passe Faible"]);
+            setTotalStrongPassword(response.data["Total Mot de Passe Fort"]);
         })
         .catch((error) => {
             console.error("Erreur lors de la récupération des statistiques", error);
         });
     }, [accessToken]);
+    
 
     return ( 
         <div className="dashboard">

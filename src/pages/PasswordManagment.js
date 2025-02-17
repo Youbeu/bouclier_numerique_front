@@ -6,18 +6,12 @@ const PasswordManagment = () => {
         <div className="password-managment" style={{width:'100%'}}>
             <h2>Gestionnaire de Mot de Passe</h2>
             <p>Gérez et Organisez Vos Mots de Passe ici.</p>
-            {/* <div className="search-bar">
-                <input type="text" placeholder="Rechercher un Mot de Passe" />
-                <button>Rechercher</button>
-            </div> */}
             <div className="content-password"> 
-                <div><PasswordList /></div>
-                <div><FloatingButton /></div>
+                <div><PasswordList /></div> {/* Composant pour afficher la liste des mots de passe */}
+                <div><FloatingButton /></div> {/* Composant pour le bouton flottant d'action */}
             </div>
-
-            
         </div>
      );
 }
  
-export default PasswordManagment;
+export default PasswordManagment; 

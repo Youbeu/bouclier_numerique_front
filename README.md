@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Lancer le Projet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prérequis
 
-## Available Scripts
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine :
 
-In the project directory, you can run:
+- **Node.js** pour le frontend.
+- **Python**  pour le backend.
+- **pip**     (le gestionnaire de paquets pour Python) pour installer les dépendances.
+- **Django**  pour le backend.
 
-### `npm start`
+## Cloner le projet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Ouvrez votre terminal.
+2. Accédez au répertoire où vous souhaitez cloner le projet.
+3. Exécutez la commande suivante pour cloner le dépôt :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   ```bash
+   git clone https://github.com/Youbeu/bouclier_numerique_back
+   ```
 
-### `npm test`
+4. Accédez au répertoire cloné :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   cd bouclier_numerique_back
+   ```
 
-### `npm run build`
+## Lancer le Backend (Django)
+1. Créez un environnement virtuel (optionnel, mais recommandé) :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   python -m venv venv
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Activez l'environnement virtuel :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   - Sur Windows :
 
-### `npm run eject`
+     ```bash
+     venv\Scripts\activate
+     ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   - Sur macOS/Linux :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+     ```bash
+     source venv/bin/activate
+     ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Installez les dépendances nécessaires :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Learn More
+4. Configurez la base de données (si nécessaire) :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   - Créez la base de données et appliquez les migrations :
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+   python manage.py migrate
+   ```
 
-### Code Splitting
+5. Lancez le serveur de développement :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```bash
+   python manage.py runserver
+   ```
 
-### Analyzing the Bundle Size
+   Le backend sera accessible à l'adresse `http://127.0.0.1:8000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Lancer le Frontend (React)
 
-### Making a Progressive Web App
+1. Accédez au répertoire du frontend :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   ```bash
+   git clone https://github.com/Youbeu/bouclier_numerique_front
+   ```
 
-### Advanced Configuration
+2. Installez les dépendances nécessaires :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```bash
+   npm install
+   ```
 
-### Deployment
+3. Lancez le serveur de développement :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   ```bash
+   npm run start
+   ```
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   Le frontend sera accessible à l'adresse `http://localhost:3000`.

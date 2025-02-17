@@ -1,3 +1,4 @@
+// Ce composant affiche la page "À propos" fournissant des informations sur le projet "Le Bouclier Numérique"
 const About = () => {
     return (
         <div className="about-container">

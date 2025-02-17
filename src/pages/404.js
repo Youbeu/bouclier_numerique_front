@@ -1,3 +1,6 @@
+/**
+ * Composant qui affiche une page 404.
+ */
 const NotFound = () => {
     return ( 
         <div className="not-found">
