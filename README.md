@@ -68,27 +68,39 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 
    Le backend sera accessible à l'adresse `http://127.0.0.1:8000`.
 
-## Lancer le Frontend (React)
+## Lancer le Frontend (Vite + React)
 
-1. Accédez au répertoire du frontend :
+1. Clonez puis installez les dépendances :
 
    ```bash
    git clone https://github.com/Youbeu/bouclier_numerique_front
-   ```
-
-2. Installez les dépendances nécessaires :
-
-   ```bash
+   cd bouclier_numerique_front
    npm install
    ```
 
-3. Lancez le serveur de développement :
+2. Copiez le fichier d'exemple d'environnement et adaptez l'URL API si besoin :
 
    ```bash
-   npm run start
+   cp env.example .env.local
    ```
 
-   Le frontend sera accessible à l'adresse `http://localhost:3000`.
+3. Démarrez le serveur de développement :
+
+   ```bash
+   npm run dev
+   ```
+
+   L'interface sera disponible sur `http://localhost:3000`.
+
+4. Construisez la version de production :
+
+   ```bash
+   npm run build
+   ```
+
+   Vous pouvez prévisualiser le build avec `npm run preview`.
+
+5. Les tests ne sont pas encore configurés (script placeholder). Pensez à mettre en place Vitest + Testing Library pour poursuivre la rénovation.
 
    Voici une section "Rôle de l'application" que vous pouvez ajouter à votre README, inspirée de votre projet *Le Bouclier Numérique* et des informations fournies :
 

@@ -67,9 +67,22 @@ const UserProfile = () => {
     };
 
     return (
-        <div>
-            <h2>Profil Utilisateur</h2>
-            <p>Consultez et Modifiez votre Profil</p>
+        <div style={{ animation: 'fadeInUp 0.6s ease' }}>
+            <h2 style={{
+                fontSize: '2rem',
+                fontWeight: 700,
+                color: 'var(--text-primary)',
+                marginBottom: 'var(--spacing-xs)'
+            }}>
+                Profil Utilisateur
+            </h2>
+            <p style={{
+                color: 'var(--text-secondary)',
+                fontSize: '1rem',
+                marginBottom: 'var(--spacing-xl)'
+            }}>
+                Consultez et modifiez votre profil
+            </p>
             <div className="user-profile">
                 <div className="user-profile-info">
                     <h2>Informations Personnelles</h2>
@@ -81,11 +94,11 @@ const UserProfile = () => {
                         <span>Email:</span>
                         <p>{userData.email || "Chargement..."}</p>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <button className="profile-button" onClick={() => setShowPasswordModal(true)}>
+                    <div style={{ display: 'flex', gap: 'var(--spacing-md)', marginTop: 'var(--spacing-lg)' }}>
+                        <button className="btn-primary" onClick={() => setShowPasswordModal(true)} style={{ flex: 1 }}>
                             Mettre à jour Mot de Passe
                         </button>
-                        <button className="profile-button" onClick={() => setShowDeleteModal(true)}>
+                        <button className="btn-danger" onClick={() => setShowDeleteModal(true)} style={{ flex: 1 }}>
                             Supprimer le compte
                         </button>
                     </div>
@@ -116,13 +129,31 @@ const UserProfile = () => {
                                 onChange={handleChange}
                                 value={formData.confirmPassword}
                             />
-                            {error && <p style={{ color: "red" }}>{error}</p>}
-                            {success && <p style={{ color: "green" }}>{success}</p>}
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <button type="submit" disabled={isLoading}>
+                            {error && (
+                                <p style={{ 
+                                    color: "var(--danger)", 
+                                    fontSize: '0.9rem',
+                                    marginTop: 'var(--spacing-xs)'
+                                }}>
+                                    {error}
+                                </p>
+                            )}
+                            {success && (
+                                <p style={{ 
+                                    color: "var(--success)", 
+                                    fontSize: '0.9rem',
+                                    marginTop: 'var(--spacing-xs)'
+                                }}>
+                                    {success}
+                                </p>
+                            )}
+                            <div style={{ display: "flex", gap: "var(--spacing-xs)", marginTop: "var(--spacing-sm)" }}>
+                                <button type="submit" className="btn-primary" disabled={isLoading} style={{ flex: 1 }}>
                                     {isLoading ? "Mise à jour..." : "Mettre à jour"}
                                 </button>
-                                <button type="button" onClick={() => setShowPasswordModal(false)}>Annuler</button>
+                                <button type="button" className="cancel-button" onClick={() => setShowPasswordModal(false)} style={{ flex: 1 }}>
+                                    Annuler
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -133,13 +164,18 @@ const UserProfile = () => {
             {showDeleteModal && (
                 <div className="modal" onClick={() => setShowDeleteModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <h2>Confirmer la Suppression</h2>
-                        <p>Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.</p>
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <button className="delete-button" onClick={handleDeleteAccount}>
+                        <h3>Confirmer la Suppression</h3>
+                        <p style={{
+                            color: 'var(--text-secondary)',
+                            marginBottom: 'var(--spacing-md)'
+                        }}>
+                            Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.
+                        </p>
+                        <div style={{ display: "flex", gap: "var(--spacing-xs)" }}>
+                            <button className="btn-danger" onClick={handleDeleteAccount} style={{ flex: 1 }}>
                                 Oui, Supprimer
                             </button>
-                            <button className="cancel-button" onClick={() => setShowDeleteModal(false)}>
+                            <button className="cancel-button" onClick={() => setShowDeleteModal(false)} style={{ flex: 1 }}>
                                 Annuler
                             </button>
                         </div>

@@ -67,22 +67,22 @@ const SignUp = () => {
                     value={formData.email} 
                 />
                 <label>Mot de passe</label>
-                <div style={{display: "flex", justifyContent: "space-between", marginBottom:"30px", alignItems: "center"}}>
+                <div style={{display: "flex", gap: "var(--spacing-xs)", marginBottom: "var(--spacing-md)", alignItems: "center"}}>
                     <input 
                         type="password" 
                         name="password"
                         required 
-                        style={{flex: 1, marginRight: "10px"}}  
+                        style={{flex: 1}}  
                         onChange={handleChange}
                         value={formData.password}
                     />
-                    <button style={{color:'#f1356d'}} type="button" onClick={generatePassword}>Générer</button>
+                    <button type="button" className="btn-secondary" onClick={generatePassword} style={{whiteSpace: 'nowrap'}}>Générer</button>
                 </div>
-                <p style={{color: "red"}}>{error}</p> {/* Affichage des erreurs */}
-                <button style={{width: "100%", color:'#f1356d'}}>Créer un compte</button>
-                <div style={{display: "flex", justifyContent: "space-around", marginTop:"20px"}}>
-                    <p>Vous avez déjà un compte ?</p>
-                    <Link to="/login">Connectez-vous</Link> 
+                {error && <p style={{color: "var(--danger)", fontSize: '0.9rem', marginBottom: 'var(--spacing-sm)'}}>{error}</p>}
+                <button type="submit" className="btn-primary" style={{width: "100%"}}>Créer un compte</button>
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "var(--spacing-xs)", marginTop: "var(--spacing-lg)"}}>
+                    <p style={{color: 'var(--text-secondary)', margin: 0}}>Vous avez déjà un compte ?</p>
+                    <Link to="/login" style={{color: 'var(--primary)', fontWeight: 600, textDecoration: 'none'}}>Connectez-vous</Link> 
                 </div>
             </form>
         </div>

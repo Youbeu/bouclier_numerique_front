@@ -43,7 +43,7 @@ const Login = () => {
     };
 
     return (
-        <div className="sign-up">
+        <div className="login-form">
             <h2>Accédez à Votre Forteresse Numérique</h2>
             <p>Entrez vos identifiants pour déverrouiller votre espace sécurisé.</p>
             <form onSubmit={handleSubmit}> 
@@ -51,13 +51,13 @@ const Login = () => {
                 <input name='email' value={email} onChange={handleChange} type="email" required /> 
                 <label>Mot de passe</label>
                 <input name='password' value={password} onChange={handleChange} type="password" required /> 
-                <p style={{ color: 'red' }}>{error}</p> {/* Affichage des messages d'erreur */}
-                <button type="submit" style={{ width: "100%", color: '#f1356d', marginTop: '20px' }} disabled={isLoading}>
+                {error && <p style={{ color: 'var(--danger)', marginTop: 'var(--spacing-xs)', fontSize: '0.9rem' }}>{error}</p>}
+                <button type="submit" className="btn-primary" style={{ width: "100%", marginTop: 'var(--spacing-md)' }} disabled={isLoading}>
                     {isLoading ? "Connexion en cours..." : "Déverrouiller Mon Accès"} 
                 </button>
-                <div style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
-                    <p>Vous n'avez pas de compte ?</p>
-                    <Link to="/sign-up">Inscrivez-vous</Link> 
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "var(--spacing-xs)", marginTop: "var(--spacing-lg)" }}>
+                    <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Vous n'avez pas de compte ?</p>
+                    <Link to="/sign-up" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>Inscrivez-vous</Link> 
                 </div>
             </form>
         </div>

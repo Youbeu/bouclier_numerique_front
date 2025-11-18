@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axiosInstance';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 /**
  * Cette page permet de consulter, mettre à jour et supprimer les détails d'un mot de passe spécifique.
  */
 const PasswordDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     
     const [password, setPassword] = useState({});
     const [isLoading, setIsLoading] = useState(true);
@@ -71,15 +72,49 @@ const PasswordDetails = () => {
     const handleDelete = async () => {
         try {
             await axiosInstance.delete(`passwords/${id}/delete/`);
-            window.location.href = '/password-managment';
             setShowDeletePopup(false);
+            navigate('/password-managment');
         } catch (err) {
             setError("Erreur lors de la suppression.");
         }
     };
 
-    if (isLoading) return <p>Chargement en cours...</p>;
-    if (error) return <p style={{ color: "red" }}>{error}</p>;
+    if (isLoading) {
+        return (
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 'var(--spacing-xl)',
+                minHeight: '400px'
+            }}>
+                <div style={{
+                    width: '50px',
+                    height: '50px',
+                    border: '3px solid #e2e8f0',
+                    borderTop: '3px solid var(--primary)',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite'
+                }} />
+            </div>
+        );
+    }
+    
+    if (error) {
+        return (
+            <div style={{
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: '2px solid var(--danger)',
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--spacing-lg)',
+                color: 'var(--danger)',
+                textAlign: 'center',
+                margin: 'var(--spacing-lg)'
+            }}>
+                {error}
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -103,9 +138,9 @@ const PasswordDetails = () => {
                 <p>Mot de passe :</p>
                 <h3>{password.decrypted_password}</h3>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <button className="profile-button" onClick={() => setShowForm(true)}>Mettre à jour</button>
-                <button className="profile-button" onClick={() => setShowDeletePopup(true)}>Supprimer</button>
+            <div style={{ display: 'flex', gap: 'var(--spacing-md)', marginTop: 'var(--spacing-lg)' }}>
+                <button className="btn-primary" onClick={() => setShowForm(true)} style={{flex: 1}}>Mettre à jour</button>
+                <button className="btn-danger" onClick={() => setShowDeletePopup(true)} style={{flex: 1}}>Supprimer</button>
             </div>
 
             {/* Formulaire de mise à jour */}
@@ -126,8 +161,10 @@ const PasswordDetails = () => {
                             <label>Nouveau Mot de Passe :</label>
                             <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Laisser vide si inchangé" />
 
-                            <button type="submit">Sauvegarder</button>
-                            <button type="button" onClick={() => setShowForm(false)}>Annuler</button>
+                            <div style={{display: 'flex', gap: 'var(--spacing-xs)', marginTop: 'var(--spacing-sm)'}}>
+                                <button type="submit" className="btn-primary" style={{flex: 1}}>Sauvegarder</button>
+                                <button type="button" className="cancel-button" style={{flex: 1}} onClick={() => setShowForm(false)}>Annuler</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -138,8 +175,11 @@ const PasswordDetails = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <h3>Êtes-vous sûr de vouloir supprimer ce mot de passe ?</h3>
-                        <button className="delete-button" onClick={handleDelete}>Oui, Supprimer</button>
-                        <button className="cancel-button" onClick={() => setShowDeletePopup(false)}>Annuler</button>
+                        <p style={{color: 'var(--text-secondary)', marginBottom: 'var(--spacing-md)'}}>Cette action est irréversible.</p>
+                        <div style={{display: 'flex', gap: 'var(--spacing-xs)'}}>
+                            <button className="delete-button" onClick={handleDelete} style={{flex: 1}}>Oui, Supprimer</button>
+                            <button className="cancel-button" onClick={() => setShowDeletePopup(false)} style={{flex: 1}}>Annuler</button>
+                        </div>
                     </div>
                 </div>
             )}

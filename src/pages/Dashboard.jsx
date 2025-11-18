@@ -2,6 +2,7 @@ import {React, useState, useEffect} from 'react';
 import CardStatistic from '../components/CardStatistic';
 import PasswordList from '../components/PasswordList';
 import axiosInstance from '../api/axiosInstance';
+import { Lock, LockOpen, Security } from '@mui/icons-material';
 
 
 const Dashboard = () => {
@@ -29,14 +30,14 @@ const Dashboard = () => {
 
     return ( 
         <div className="dashboard">
-            <h2>Tableau De Bord</h2>
-            <p>Centre Des Opérations</p>
+            <h2>Tableau de Bord</h2>
+            <p>Vue d'ensemble de vos mots de passe</p>
             <div className='card-statistic'>
                 <h2>Les Statistiques</h2>
-                <div style={{display:'flex', justifyContent:'space-around', width:'100%'}}>
-                    <CardStatistic title="Total Mot de Passe" value={totalPassword} />
-                    <CardStatistic title="Total Mot de Passe Faible" value={totalWeakPassword} />
-                    <CardStatistic title="Total Mot de Passe Fort" value={totalStrongPassword} />
+                <div className="statistics-grid">
+                    <CardStatistic title="Total Mot de Passe" value={totalPassword} icon={<Lock />} />
+                    <CardStatistic title="Total Mot de Passe Faible" value={totalWeakPassword} icon={<LockOpen />} />
+                    <CardStatistic title="Total Mot de Passe Fort" value={totalStrongPassword} icon={<Security />} />
                 </div>
                 <PasswordList />
             </div>

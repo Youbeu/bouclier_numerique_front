@@ -36,7 +36,8 @@ function FloatingButton() {
             setError("Échec de l'ajout du mot de passe.");
         } finally {
             setIsLoading(false);
-            window.location.reload();
+            // Déclencher un événement pour rafraîchir la liste des mots de passe
+            window.dispatchEvent(new CustomEvent('passwordAdded'));
         }
     };
 
@@ -56,12 +57,26 @@ function FloatingButton() {
 
     return (
         <div style={{ width: '100%' }}>
-            <button onClick={() => setShowModal(true)} className="floating-button" >+</button>
+            <button 
+                onClick={() => setShowModal(true)} 
+                className="floating-button"
+                aria-label="Ajouter un nouveau mot de passe"
+            >
+                <span style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    fontSize: '2rem',
+                    lineHeight: 1
+                }}>
+                    +
+                </span>
+            </button>
 
             {showModal && (
                 <div className="modal" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <h2>Ajouter un Nouveau Mot de Passe</h2>
+                        <h3>Ajouter un Nouveau Mot de Passe</h3>
                         <form onSubmit={handleSubmit}>
                             <label>Titre</label>
                             <input
@@ -78,7 +93,7 @@ function FloatingButton() {
                                 name="identifier"
                                 placeholder="Identifiant Associé"
                                 onChange={handleChange}
-                                value={formData.username}
+                                value={formData.identifier}
                             />
                             <label>Email Associé</label>
                             <input
@@ -98,17 +113,17 @@ function FloatingButton() {
                                     onChange={handleChange}
                                     value={formData.password}
                                 />
-                                <button type='button' onClick={toggleShowPassword} style={{backgroundColor:'#4CAF50'}}>
+                                <button type='button' onClick={toggleShowPassword} className="btn-success" style={{whiteSpace: 'nowrap'}}>
                                     {showPassword ? "Cacher" : "Montrer"}
                                 </button>
                             </div>
-                            <button type='button' onClick={generatePassword} style={{width:'100%'}}>Générer</button>
-                            <p style={{ color: 'red' }}>{error}</p>
-                            <div style={{width:'100%'}}>
-                                <button type='submit' disabled={isLoading} style={{width:'50%'}}>
-                                    {isLoading ? "Ajout en cours..." : "Ajouter le Mot de Passe"}
+                            <button type='button' onClick={generatePassword} className="btn-secondary" style={{width:'100%'}}>Générer un mot de passe</button>
+                            {error && <p style={{ color: 'var(--danger)', fontSize: '0.9rem' }}>{error}</p>}
+                            <div style={{display: 'flex', gap: 'var(--spacing-xs)', width:'100%'}}>
+                                <button type='submit' disabled={isLoading} className="btn-primary" style={{flex: 1}}>
+                                    {isLoading ? "Ajout en cours..." : "Ajouter"}
                                 </button> 
-                                <button type='button' style={{width:'50%'}} onClick={() => setShowModal(false)}>Annuler</button>  
+                                <button type='button' className="cancel-button" style={{flex: 1}} onClick={() => setShowModal(false)}>Annuler</button>  
                             </div>
                         </form>
                     </div>
